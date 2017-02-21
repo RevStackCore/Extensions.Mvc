@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="package.json">
+    <Files>
+      <File FileName="RevStackCore.Extensions.Mvc/RevStackCore.Extensions.Mvc.csproj" Line="12" Column="61" />
+      <File FileName="RevStackCore.Extensions.Mvc/Validation/SelectRequired.cs" Line="7" Column="51" />
+      <File FileName="README.md" Line="4" Column="1" />
+      <File FileName="package.json" Line="2" Column="40" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
