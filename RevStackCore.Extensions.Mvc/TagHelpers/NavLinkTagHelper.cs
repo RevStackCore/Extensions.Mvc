@@ -7,13 +7,14 @@ using System.Linq;
 
 namespace RevStackCore.Extensions.Mvc.TagHelpers
 {
-	[HtmlTargetElement("nav-link", Attributes = "controller, action, id, label")]
+	[HtmlTargetElement("nav-link")]
 	public class NavLinkTagHelper : TagHelper
 	{
 		public string Controller { get; set; }
 		public string Action { get; set; }
 		public string Id { get; set; }
 		public string Label { get; set; }
+        public string Query { get; set; }
 
 		[ViewContext]
 		public ViewContext ViewContext { get; set; }
@@ -34,6 +35,9 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 			if (!string.IsNullOrEmpty(Id))
 				menuUrl += "/" + Id;
 
+            if (!string.IsNullOrEmpty(Query))
+                menuUrl += '?' + Query;
+
 			output.TagName = "a";
 			output.Attributes.SetAttribute("href", $"{menuUrl}");
 			output.Attributes.SetAttribute("title", Label);
@@ -50,7 +54,7 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 			}
 			else if (!string.IsNullOrEmpty(Id))
 			{
-				if (isNavIdentifierFromView())
+				if (hasNavIdentifierFromView())
 				{
 					string activeCss = cssClass == null ? "active" : cssClass.Value + " active";
 					output.Attributes.Add("class", activeCss);
@@ -82,7 +86,7 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 
 		}
 
-		private bool isNavIdentifierFromView()
+		private bool hasNavIdentifierFromView()
 		{
 			try
 			{
