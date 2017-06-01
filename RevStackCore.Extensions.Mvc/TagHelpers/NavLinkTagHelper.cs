@@ -15,6 +15,7 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 		public string Id { get; set; }
 		public string Label { get; set; }
         public string Query { get; set; }
+        public string NavId { get; set; }
 
 		[ViewContext]
 		public ViewContext ViewContext { get; set; }
@@ -52,7 +53,7 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 				string activeCss = cssClass == null ? "active" : cssClass.Value + " active";
 				output.Attributes.Add("class", activeCss);
 			}
-			else if (!string.IsNullOrEmpty(Id))
+            else if (!string.IsNullOrEmpty(Id) || !string.IsNullOrEmpty(NavId))
 			{
 				if (hasNavIdentifierFromView())
 				{
@@ -91,12 +92,22 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 			try
 			{
 				var tempData = ViewContext.TempData;
+				string attrNavId = NavId;
+				string attrId = Id;
+				if (string.IsNullOrEmpty(attrNavId))
+				{
+					attrNavId = "";
+				}
+				if (string.IsNullOrEmpty(Id))
+				{
+					attrId = "";
+				}
 				if (tempData != null)
 				{
 					var navId = tempData["nav-id"];
 					if (navId != null)
 					{
-						return (navId.ToString().ToLower() == Id.ToLower());
+						return ((navId.ToString().ToLower() == attrId.ToLower()) || (navId.ToString().ToLower() == attrNavId.ToLower()));
 					}
 					else
 						return false;
