@@ -74,10 +74,17 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 		private bool isActiveRoute(object currentController, object currentAction, object currentId)
 		{
 			string strCurrentId = null;
+			string strCurrentAction = null;
+			string action = Action;
 			if (currentId != null)
 				strCurrentId = currentId.ToString();
+			if (currentAction != null)
+				strCurrentAction = currentAction.ToString();
 
-			if (string.IsNullOrEmpty(strCurrentId))
+			if (string.IsNullOrEmpty(strCurrentId) && (string.IsNullOrEmpty(strCurrentAction) || strCurrentAction == "Index"))
+				return (String.Equals(Controller, currentController as string, StringComparison.OrdinalIgnoreCase));
+
+			else if (string.IsNullOrEmpty(strCurrentId))
 				return ((String.Equals(Action, currentAction as string, StringComparison.OrdinalIgnoreCase)
 						 && (String.Equals(Controller, currentController as string, StringComparison.OrdinalIgnoreCase))));
 			else
