@@ -14,8 +14,9 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 		public string Action { get; set; }
 		public string Id { get; set; }
 		public string Label { get; set; }
-        public string Query { get; set; }
-        public string NavId { get; set; }
+		public string Query { get; set; }
+		public string NavId { get; set; }
+		public bool FullMatch { get; set; }
 
 		[ViewContext]
 		public ViewContext ViewContext { get; set; }
@@ -36,8 +37,8 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 			if (!string.IsNullOrEmpty(Id))
 				menuUrl += "/" + Id;
 
-            if (!string.IsNullOrEmpty(Query))
-                menuUrl += '?' + Query;
+			if (!string.IsNullOrEmpty(Query))
+				menuUrl += '?' + Query;
 
 			output.TagName = "a";
 			output.Attributes.SetAttribute("href", $"{menuUrl}");
@@ -47,19 +48,21 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 			var currentController = routeData["controller"];
 			var currentAction = routeData["action"];
 			var currentId = routeData["id"];
+			//default isActive route check
 			bool isActive = isActiveRoute(currentController, currentAction, currentId);
-			if (isActive)
+			//override default active check if NavId attribute is set
+			if (!string.IsNullOrEmpty(NavId))
 			{
-				string activeCss = cssClass == null ? "active" : cssClass.Value + " active";
-				output.Attributes.Add("class", activeCss);
-			}
-            else if (!string.IsNullOrEmpty(Id) || !string.IsNullOrEmpty(NavId))
-			{
-				if (hasNavIdentifierFromView())
+				if (isNavIdentifierMatch())
 				{
 					string activeCss = cssClass == null ? "active" : cssClass.Value + " active";
 					output.Attributes.Add("class", activeCss);
 				}
+			}
+			else if (isActive)
+			{
+				string activeCss = cssClass == null ? "active" : cssClass.Value + " active";
+				output.Attributes.Add("class", activeCss);
 			}
 			else
 			{
@@ -70,8 +73,36 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 			}
 
 		}
-
+		/// <summary>
+		/// Checks if an active route.
+		/// </summary>
+		/// <returns><c>true</c>, if active route check passes, <c>false</c> otherwise.</returns>
+		/// <param name="currentController">Current controller.</param>
+		/// <param name="currentAction">Current action.</param>
+		/// <param name="currentId">Current identifier.</param>
 		private bool isActiveRoute(object currentController, object currentAction, object currentId)
+		{
+
+			//if FullMatch attribute is set, the full pattern<Controller,Action,Id> must match
+			if (FullMatch)
+			{
+				return fullActiveRouteCheck(currentController, currentAction, currentId);
+			}
+			else
+			{
+				//default match is controller only
+				return (String.Equals(Controller, currentController as string, StringComparison.OrdinalIgnoreCase));
+			}
+		}
+
+        /// <summary>
+        /// Checks the full route pattern for a match.
+        /// </summary>
+        /// <returns><c>true</c>, if active route check passes, <c>false</c> otherwise.</returns>
+        /// <param name="currentController">Current controller.</param>
+        /// <param name="currentAction">Current action.</param>
+        /// <param name="currentId">Current identifier.</param>
+		private bool fullActiveRouteCheck(object currentController, object currentAction, object currentId)
 		{
 			string strCurrentId = null;
 			string strCurrentAction = null;
@@ -91,30 +122,23 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 				return ((String.Equals(Action, currentAction as string, StringComparison.OrdinalIgnoreCase)
 						 && (String.Equals(Controller, currentController as string, StringComparison.OrdinalIgnoreCase))
 						 && (String.Equals(Id, strCurrentId as string, StringComparison.OrdinalIgnoreCase))));
-
 		}
 
-		private bool hasNavIdentifierFromView()
+        /// <summary>
+        /// Checks if NavId attribute matches the value in TempData
+        /// </summary>
+        /// <returns><c>true</c>, if nav identifier match was ised, <c>false</c> otherwise.</returns>
+		private bool isNavIdentifierMatch()
 		{
 			try
 			{
 				var tempData = ViewContext.TempData;
-				string attrNavId = NavId;
-				string attrId = Id;
-				if (string.IsNullOrEmpty(attrNavId))
-				{
-					attrNavId = "";
-				}
-				if (string.IsNullOrEmpty(Id))
-				{
-					attrId = "";
-				}
 				if (tempData != null)
 				{
 					var navId = tempData["nav-id"];
 					if (navId != null)
 					{
-						return ((navId.ToString().ToLower() == attrId.ToLower()) || (navId.ToString().ToLower() == attrNavId.ToLower()));
+						return (navId.ToString().ToLower() == NavId.ToLower());
 					}
 					else
 						return false;
