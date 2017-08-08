@@ -107,25 +107,30 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 			string strCurrentId = "";
 			string strCurrentAction = "";
 			string action = Action;
-            if(string.IsNullOrEmpty(action))
-            {
-                action = "";
-            }
+			string id = Id;
+			if (string.IsNullOrEmpty(action))
+			{
+				action = "";
+			}
+			if (string.IsNullOrEmpty(id))
+			{
+				id = "";
+			}
 			if (currentId != null)
 				strCurrentId = currentId.ToString();
 			if (currentAction != null)
 				strCurrentAction = currentAction.ToString();
 
-            if (string.IsNullOrEmpty(strCurrentId) && (string.IsNullOrEmpty(strCurrentAction) || strCurrentAction.ToLower() == "index") && (action.ToLower()!="index"))
+			if (string.IsNullOrEmpty(strCurrentId) && (string.IsNullOrEmpty(action)))
 				return (String.Equals(Controller, currentController as string, StringComparison.OrdinalIgnoreCase));
 
-			else if (string.IsNullOrEmpty(strCurrentId))
+			if (string.IsNullOrEmpty(strCurrentId))
 				return ((String.Equals(Action, currentAction as string, StringComparison.OrdinalIgnoreCase)
 						 && (String.Equals(Controller, currentController as string, StringComparison.OrdinalIgnoreCase))));
 			else
-				return ((String.Equals(Action, currentAction as string, StringComparison.OrdinalIgnoreCase)
+				return ((String.Equals(action, currentAction as string, StringComparison.OrdinalIgnoreCase)
 						 && (String.Equals(Controller, currentController as string, StringComparison.OrdinalIgnoreCase))
-						 && (String.Equals(Id, strCurrentId as string, StringComparison.OrdinalIgnoreCase))));
+						 && (String.Equals(id, strCurrentId as string, StringComparison.OrdinalIgnoreCase))));
 		}
 
         /// <summary>
