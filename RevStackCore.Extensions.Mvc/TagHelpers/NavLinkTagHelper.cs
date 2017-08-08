@@ -16,7 +16,7 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 		public string Label { get; set; }
 		public string Query { get; set; }
 		public string NavId { get; set; }
-		public bool FullMatch { get; set; }
+		public bool StrictMatch { get; set; }
 
 		[ViewContext]
 		public ViewContext ViewContext { get; set; }
@@ -84,9 +84,9 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
 		{
 
 			//if FullMatch attribute is set, the full pattern<Controller,Action,Id> must match
-			if (FullMatch)
+			if (StrictMatch)
 			{
-				return fullActiveRouteCheck(currentController, currentAction, currentId);
+				return strictActiveRouteCheck(currentController, currentAction, currentId);
 			}
 			else
 			{
@@ -102,17 +102,21 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
         /// <param name="currentController">Current controller.</param>
         /// <param name="currentAction">Current action.</param>
         /// <param name="currentId">Current identifier.</param>
-		private bool fullActiveRouteCheck(object currentController, object currentAction, object currentId)
+		private bool strictActiveRouteCheck(object currentController, object currentAction, object currentId)
 		{
-			string strCurrentId = null;
-			string strCurrentAction = null;
+			string strCurrentId = "";
+			string strCurrentAction = "";
 			string action = Action;
+            if(string.IsNullOrEmpty(action))
+            {
+                action = "";
+            }
 			if (currentId != null)
 				strCurrentId = currentId.ToString();
 			if (currentAction != null)
 				strCurrentAction = currentAction.ToString();
 
-			if (string.IsNullOrEmpty(strCurrentId) && (string.IsNullOrEmpty(strCurrentAction) || strCurrentAction == "Index"))
+            if (string.IsNullOrEmpty(strCurrentId) && (string.IsNullOrEmpty(strCurrentAction) || strCurrentAction.ToLower() == "index") && (action.ToLower()!="index"))
 				return (String.Equals(Controller, currentController as string, StringComparison.OrdinalIgnoreCase));
 
 			else if (string.IsNullOrEmpty(strCurrentId))
