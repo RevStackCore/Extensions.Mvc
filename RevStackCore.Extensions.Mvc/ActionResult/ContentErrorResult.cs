@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RevStackCore.Extensions.Mvc
 {
-    public class ContentErrorResult
+    public class ContentErrorResult : IActionResult
     {
 		private int _statusCode;
         private string _errorMessage;
