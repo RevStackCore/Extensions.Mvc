@@ -1,29 +1,23 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RevStackCore.Extensions.Mvc
 {
-    public class ContentErrorResult : IActionResult
-    {
-		private int _statusCode;
-        private string _errorMessage;
-		public ContentErrorResult(string errorMessage)
+    public class ContentErrorResult : ObjectResult
+	{
+		public ContentErrorResult(object value) : base(value)
 		{
-            _errorMessage = errorMessage;
-			_statusCode = StatusCodes.Status400BadRequest;
+			var validationResult = new ValidationResultModel(value.ToString());
+			Value = validationResult;
+			StatusCode = StatusCodes.Status400BadRequest;
 		}
-		public ContentErrorResult(string errorMessage, int statusCode)
+
+		public ContentErrorResult(object value, int statusCode) : base(value)
 		{
-			_errorMessage = errorMessage;
-			_statusCode = statusCode;
+			var validationResult = new ValidationResultModel(value.ToString());
+			Value = validationResult;
+			StatusCode = statusCode;
 		}
-		public Task ExecuteResultAsync(ActionContext context)
-		{
-            var validationResult = new ValidationResultModel(_errorMessage);
-			var result = new ObjectResult(validationResult);
-			result.StatusCode = _statusCode;
-			return Task.FromResult(result);
-		}
-    }
+
+	}
 }

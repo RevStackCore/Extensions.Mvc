@@ -1,11 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="RevStackCore.Extensions.Mvc/ActionResult/JsonSerializeViewResult.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RevStackCore.Extensions.Mvc/ActionResult/ContentErrorResult.cs">
     <Files>
-      <File FileName="RevStackCore.Extensions.Mvc/TagHelpers/NavLinkTagHelper.cs" Line="115" Column="33" />
-      <File FileName="RevStackCore.Extensions.Mvc/ActionResult/ModelErrorResult.cs" Line="8" Column="50" />
-      <File FileName="RevStackCore.Extensions.Mvc/ActionResult/ContentErrorResult.cs" Line="9" Column="27" />
-      <File FileName="RevStackCore.Extensions.Mvc/ActionResult/ContentRedirectResult.cs" Line="1" Column="1" />
-      <File FileName="RevStackCore.Extensions.Mvc/ActionResult/JsonSerializeViewResult.cs" Line="1" Column="1" />
+      <File FileName="RevStackCore.Extensions.Mvc/ActionResult/ModelErrorResult.cs" Line="13" Column="13" />
+      <File FileName="RevStackCore.Extensions.Mvc/ActionResult/ContentErrorResult.cs" Line="11" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
