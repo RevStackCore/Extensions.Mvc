@@ -12,11 +12,11 @@ namespace RevStackCore.Extensions.Mvc
 		public List<ValidationError> Errors { get; }
 
 		public ValidationResultModel(ModelStateDictionary modelState)
-		{
-            Message = "Error: " + modelState.Keys.SelectMany(x => modelState[x].Errors.FirstOrDefault().ErrorMessage);
+        {
 			Errors = modelState.Keys
 					.SelectMany(key => modelState[key].Errors.Select(x => new ValidationError(key, x.ErrorMessage)))
 					.ToList();
+            Message = Errors.FirstOrDefault().Message;
 		}
         public ValidationResultModel(string error)
         {
