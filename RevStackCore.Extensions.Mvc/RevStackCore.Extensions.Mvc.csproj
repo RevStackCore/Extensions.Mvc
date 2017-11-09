@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
 	<PackageId>RevStackCore.Extensions.Mvc</PackageId>
-    <PackageVersion>1.0.5</PackageVersion>
+    <PackageVersion>1.0.6</PackageVersion>
     <Authors>S. Francis</Authors>
     <Description>aspnetcore mvc extensions</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -17,6 +17,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.1">
     </PackageReference>
+    <PackageReference Include="RevStackCore.Pattern" Version="1.0.5" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActionResult\" />
@@ -24,5 +25,7 @@
     <Folder Include="Validation\" />
     <Folder Include="Entity\" />
     <Folder Include="ActionFilterAttribute\" />
+    <Folder Include="Settings\" />
+    <Folder Include="Enum\" />
   </ItemGroup>
 </Project>
