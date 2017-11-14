@@ -34,6 +34,7 @@ namespace RevStackCore.Extensions.Mvc.TagHelpers
                      </div>
                      <div class='status-description' id='formMessageDescription'>{Model.Message}</div>
                      <a href='{Model.Link}' class='{linkClass}' id='formMessageLink'>{Model.LinkLabel}</a>
+                   </div>
                  "
             );
 
