@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
 	<PackageId>RevStackCore.Extensions.Mvc</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <Authors>S. Francis</Authors>
     <Description>aspnetcore mvc extensions</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -15,10 +15,9 @@
   <ItemGroup>
     <PackageReference Include="RevStackCore.Serialization" Version="1.0.2">
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.1">
-    </PackageReference>
     <PackageReference Include="RevStackCore.Pattern" Version="1.0.5" />
     <PackageReference Include="RevStackCore.Extensions" Version="1.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActionResult\" />
