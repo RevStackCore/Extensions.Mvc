@@ -7,17 +7,17 @@
     <Authors>S. Francis</Authors>
     <Description>aspnetcore mvc extensions</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Net Standard 1.6 release</PackageReleaseNotes>
+    <PackageReleaseNotes>Net Standard 2.0 release</PackageReleaseNotes>
     <Copyright>Copyright 2017</Copyright>
     <PackageTags>RevStackCore Mvc Extensions</PackageTags>		
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
     <PackageReference Include="RevStackCore.Serialization" Version="1.0.2">
     </PackageReference>
     <PackageReference Include="RevStackCore.Pattern" Version="1.0.5" />
     <PackageReference Include="RevStackCore.Extensions" Version="1.0.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActionResult\" />
