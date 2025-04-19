@@ -18,8 +18,9 @@ branches:
 
 deploy:
   provider: NuGet
+  server: https://ci.appveyor.com/nuget/tachyon1337-mrxqao6t197e
   api_key:
-    secure: NsRG1nF95vnbl0Bk1WH1Y8s5md4U3oGw/A4GYZnepJ6r10AqPrRdyazpVZeyQBB8
+    secure: 77VoJopJzeflBblhONXBNYwMWlQ4C1dAgaWjGXKfJgc=
   skip_symbols: false
   artifact: /.*\.nupkg/
   
