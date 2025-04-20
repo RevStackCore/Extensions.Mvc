@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
 	<PackageId>RevStackCore.Extensions.Mvc</PackageId>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageVersion>3.0.0</PackageVersion>
     <Authors>S. Francis</Authors>
     <Description>aspnetcore mvc extensions</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

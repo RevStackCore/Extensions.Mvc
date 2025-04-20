@@ -1,6 +1,6 @@
 {
   "name": "RevStackCore.Extensions.Mvc",
-  "version": "3.0.2",
+  "version": "3.0.0",
   "description": "aspnetcore mvc extensions",
   "main": "RevStackCore.Extensions.Mvc.sln",
   "scripts": {
